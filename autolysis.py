@@ -149,5 +149,5 @@ if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Usage: uv run autolysis.py dataset.csv")
     else:
-        dataset_file = sys.argv[1]
+        dataset_file = sys.argv[-1]
         main(file_path)
