@@ -1,5 +1,5 @@
 #import required libraries
-pip install seaborn
+
 import os
 import pandas as pd
 import seaborn as sns
