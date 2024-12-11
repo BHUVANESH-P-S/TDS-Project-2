@@ -73,7 +73,7 @@ These queries can direct more granular analyses and provide further understandin
 ![Chart](histogram_Log_GDP_per_capita.png)
 ![Chart](histogram_Social_support.png)
 ![Chart](histogram_Healthy_life_expectancy_at_birth.png)
-![Chart](histogram_Freedom-to_make_life_choices.png)
+![Chart](histogram_Freedom_to_make_life_choices.png)
 ![Chart](histogram_Generosity.png)
 ![Chart](histogram_Perceptions_of_corruption.png)
 ![Chart](histogram_Positive_affect.png)
