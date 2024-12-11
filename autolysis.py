@@ -125,10 +125,9 @@ def write_readme(narrative, charts):
             f.write(f"![Chart]({chart})\n")
 
 # Main function
-def main():
+def main(file_path):
     # Initialize and load dataset
     initialize_openai()
-    file_path = Path('goodreads.csv')
     df = load_dataset(file_path)
 
     # Perform analysis
@@ -143,4 +142,9 @@ def main():
     print("[Download README.md](./output/README.md)")
 
 if __name__ == "__main__":
-    main()
+    import sys
+    if len(sys.argv) != 2:
+        print("Usage: uv run autolysis.py dataset.csv")
+    else:
+        dataset_file = sys.argv[1]
+        main(file_path)
