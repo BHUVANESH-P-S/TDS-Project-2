@@ -14,7 +14,12 @@ def initialize_openai():
 # Load dataset
 def load_dataset(file_path):
     try:
-        df = pd.read_csv(file_path)
+        # Attempt to read the file with UTF-8 encoding
+        df = pd.read_csv(file_path, encoding='utf-8')
+        return df
+    except UnicodeDecodeError:
+        # If UTF-8 fails, try with a fallback encoding
+        df = pd.read_csv(file_path, encoding='latin1')
         return df
     except Exception as e:
         raise FileNotFoundError(f"Error loading file {file_path}: {e}")
