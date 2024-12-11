@@ -1,3 +1,4 @@
+#import required libraries
 import os
 import pandas as pd
 import seaborn as sns
@@ -6,12 +7,13 @@ import openai
 from pathlib import Path
 import requests
 
+#function to load api key from environment variable
 def initialize_openai():
     openai.api_key = os.getenv('AIPROXY_TOKEN')
     if not openai.api_key:
         raise EnvironmentError("AIPROXY_TOKEN environment variable not set.")
 
-# Load dataset
+# function to Load dataset
 def load_dataset(file_path):
     try:
         # Attempt to read the file with UTF-8 encoding
@@ -22,9 +24,10 @@ def load_dataset(file_path):
         df = pd.read_csv(file_path, encoding='latin1')
         return df
     except Exception as e:
+        #Exception handling for FileNotFoundError
         raise FileNotFoundError(f"Error loading file {file_path}: {e}")
 
-# Perform basic analysis
+# Function to Perform basic analysis
 def basic_analysis(df):
     summary = df.describe(include='all')
     missing_values = df.isnull().sum()
@@ -41,7 +44,7 @@ def basic_analysis(df):
 
     return insights
 
-# Generate visualizations
+#Function to Generate visualizations like Histogram and Correlation Heatmap
 def generate_visualizations(df):
     charts = []
     
@@ -61,7 +64,7 @@ def generate_visualizations(df):
 
     # Histogram for numerical columns
     for col in numerical_df.columns:  # Iterate through numerical columns
-        plt.figure()
+        plt.figure(figsize=(10, 8))
         sns.histplot(df[col].dropna(), kde=True, bins=30)
         hist_path = f"histogram_{col}.png"
         plt.savefig(hist_path)
@@ -73,7 +76,7 @@ def generate_visualizations(df):
 
     return charts
 
-# Generate narrative using LLM
+# Function to Generate narrative using LLM
 def generate_narrative(insights, images):
     prompt = f"""
     Dataset Analysis Report:
