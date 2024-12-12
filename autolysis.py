@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import openai
 from pathlib import Path
 import requests
+from PIL import Images
 
 #function to load api key from environment variable
 def initialize_openai():
