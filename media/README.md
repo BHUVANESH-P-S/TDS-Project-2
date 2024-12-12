@@ -26,9 +26,9 @@ Network analysis may not apply directly due to the nature of the dataset; howeve
 ### Conclusion
 The dataset provides a rich landscape for analysis with its diverse features and temporal data. While there are areas needing attention—especially emanating from missing values and outliers—the insights extracted can help understand trends in media content across languages and types. By diving deep into correlation analysis, cluster findings, and investigating temporal changes, the dataset has the potential to provide valuable insights into user preferences and media consumption patterns.
 
-![Chart](output/media/correlation_heatmap.png)
-![Chart](output/media/histogram_overall.png)
-![Chart](output/media/histogram_quality.png)
-![Chart](output/media/histogram_repeatability.png)
-![Chart](output/media/histogram_Anomaly.png)
-![Chart](output/media/histogram_Cluster.png)
+![Chart](correlation_heatmap.png)
+![Chart](histogram_overall.png)
+![Chart](histogram_quality.png)
+![Chart](histogram_repeatability.png)
+![Chart](histogram_Anomaly.png)
+![Chart](histogram_Cluster.png)
