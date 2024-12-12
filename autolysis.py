@@ -47,7 +47,7 @@ def basic_analysis(df):
     return insights
 
 #Function to Generate visualizations like Histogram and Correlation Heatmap
-def generate_visualizations(df):
+def generate_visualizations(df,output_dir):
     charts = []
     
     # Correlation heatmap for numerical columns
@@ -56,7 +56,7 @@ def generate_visualizations(df):
         plt.figure(figsize=(10, 8))
         corr = numerical_df.corr()  # Calculate correlation on numerical data
         sns.heatmap(corr, annot=True, cmap='coolwarm', fmt='.2f')
-        heatmap_path = "correlation_heatmap.png"
+        heatmap_path = output_dir/"correlation_heatmap.png"
         plt.savefig(heatmap_path)
         plt.close()
         with Image.open(heatmap_path) as img:
@@ -68,7 +68,7 @@ def generate_visualizations(df):
     for col in numerical_df.columns:  # Iterate through numerical columns
         plt.figure(figsize=(10, 8))
         sns.histplot(df[col].dropna(), kde=True, bins=30)
-        hist_path = f"histogram_{col}.png"
+        hist_path = output_dir/f"histogram_{col}.png"
         plt.savefig(hist_path)
         plt.close()
         with Image.open(hist_path) as img:
@@ -118,8 +118,8 @@ def generate_narrative(insights, images):
         return None
 
 # Write results to README.md
-def write_readme(narrative, charts):
-    readme_path = "README.md"
+def write_readme(output_dir,narrative, charts):
+    readme_path = output_dir/"README.md"
     with open(readme_path, "w") as f:
         f.write("# Automated Data Analysis\n\n")
         if narrative:
@@ -135,16 +135,21 @@ def main(file_path):
     initialize_openai()
     df = load_dataset(file_path)
 
+# Prepare output directory
+    dataset_name = Path(file_path).stem  # Get the file name without extension
+    output_dir = Path("output") / dataset_name
+    output_dir.mkdir(parents=True, exist_ok=True)
+
     # Perform analysis
     summary = basic_analysis(df)
-    charts = generate_visualizations(df)
+    charts = generate_visualizations(df,output_dir)
     narrative = generate_narrative(summary, charts)
 
     # Write results
-    write_readme(narrative, charts)
+    write_readme(output_dir,narrative, charts)
     print("Analysis complete. Results saved")
     print("Download your results using the following link:")
-    print("[Download README.md](./output/README.md)")
+    print(f"[Download README.md](./output/{output_dir}/README.md)")
 
 if __name__ == "__main__":
     import sys
