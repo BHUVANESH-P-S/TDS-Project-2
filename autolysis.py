@@ -1,5 +1,3 @@
-#MODIFIED CODE
-
 import os
 import pandas as pd
 import seaborn as sns
@@ -21,7 +19,7 @@ def initialize_openai():
     openai.api_key = os.getenv('AIPROXY_TOKEN')
     if not openai.api_key:
         raise EnvironmentError("AIPROXY_TOKEN environment variable not set.")
-        
+
 # Load dataset
 def load_dataset(file_path):
     try:
@@ -38,11 +36,13 @@ def basic_analysis(df):
     summary = df.describe(include='all')
     missing_values = df.isnull().sum()
     column_types = df.dtypes
+    df_info=df.info()
 
     insights = {
         "Summary": summary,
         "Missing_values": missing_values,
-        "Column_types": column_types
+        "Column_types": column_types,
+        "Dataset_info":df_info
     }
 
     return insights
@@ -136,6 +136,7 @@ def generate_narrative(insights, images):
     Dataset Summary: {insights['Summary']}
     Missing Values: {insights['Missing_values']}
     Column Types: {insights['Column_types']}
+    Dataset Information: {insights['Dataset_info']}
 
     Please provide a detailed narrative of the dataset, covering the following points:
 
