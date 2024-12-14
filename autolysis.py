@@ -4,7 +4,6 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import openai
 from pathlib import Path
-from google.colab import files
 import requests
 from sklearn.ensemble import IsolationForest
 from sklearn.cluster import KMeans
