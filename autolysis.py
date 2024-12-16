@@ -8,7 +8,6 @@ import requests
 from sklearn.ensemble import IsolationForest
 from sklearn.cluster import KMeans
 from sklearn.linear_model import LinearRegression
-import networkx as nx
 import geopandas as gpd
 from PIL import Image
 
@@ -94,14 +93,6 @@ def geographic_analysis(df):
         return geo_df
     return None
 
-# Network analysis
-def network_analysis(df):
-    if {'source', 'target'}.issubset(df.columns):
-        G = nx.from_pandas_edgelist(df, source='source', target='target')
-        centrality = nx.degree_centrality(G)
-        return centrality
-    return None
-
 # Generate visualizations
 def generate_visualizations(df,output_dir):
     charts = []
@@ -145,7 +136,6 @@ def generate_narrative(insights, images):
     4. Time Series Patterns
     5. Cluster Analysis Findings
     6. Geographic Insights
-    7. Network Analysis Observations
     """
 
     response = requests.post(
@@ -192,7 +182,6 @@ def main(file_path):
     time_series = time_series_analysis(df)
     df = cluster_analysis(df)
     geo_df = geographic_analysis(df)
-    centrality = network_analysis(df)
 
     insights = basic_analysis(df)
     charts = generate_visualizations(df,output_dir)
